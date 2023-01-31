@@ -23,6 +23,7 @@
  =----------------------------------------------------------------= */
 
 let path = require("path");
+let readline = require("readline");
 
 export class Utils {
 	/**
@@ -62,10 +63,8 @@ export class Utils {
 	}
 
 	public static updateLine(text: string): void {
-		// @ts-ignore
-		process.stdout.clearLine();
-		// @ts-ignore
-		process.stdout.cursorTo(0);
+		readline.clearLine(process.stdout, 0);
+		readline.cursorTo(process.stdout, 0);
 		process.stdout.write(text+ '\r');
 	}
 

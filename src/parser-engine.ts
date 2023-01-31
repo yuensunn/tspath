@@ -25,6 +25,7 @@
 const espree   = require("espree");
 const escodegen = require("escodegen");
 const chalk   = require("ansi-colors");
+const readline = require ("readline");
 
 import { UrlUtils }            from "dina-common";
 import { Const }               from "./tspath.const";
@@ -176,16 +177,13 @@ export class ParserEngine {
 		for (let i = 0; i < fileList.length; i++) {
 			let filename = fileList[ i ];
 
-			// @ts-ignore
-			process.stdout.clearLine();
-			// @ts-ignore
-			process.stdout.cursorTo(0);
+			readline.clearLine(process.stdout, 0);
+			readline.cursorTo(process.stdout,0);
 			process.stdout.write(`Processing file "${ path.basename(filename) }"...` + "\r");
 			if (Const.DEBUG_MODE) await Utils.sleep(150);
 			this.processFile(filename);
 
-			// @ts-ignore
-			process.stdout.clearLine();
+			readline.clearLine(process.stdout, 0);
 		}
 
 		log(chalk.bold("Total files processed:"), this.nrFilesProcessed);
